@@ -23,6 +23,7 @@ import com.listentogether.ensemble.app.AppController;
 import com.listentogether.ensemble.helper.SQLiteHandler;
 import com.listentogether.ensemble.helper.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -133,7 +134,10 @@ public class LoginActivity extends Activity {
                         // Now store the user in SQLite
                         String uid = jObj.getString("uid");
 
-                        JSONObject user = jObj.getJSONObject("user");
+                        JSONArray users = jObj.getJSONArray("users");
+
+                        JSONObject user = users.getJSONObject(0);
+
                         String name = user.getString("name");
                         String email = user.getString("email");
                         String created_at = user
