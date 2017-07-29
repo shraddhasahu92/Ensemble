@@ -148,7 +148,7 @@ public class LoginActivity extends Activity {
 
                         // Launch main com.ensemble.activity
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                ContactsActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
