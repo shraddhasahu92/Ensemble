@@ -3,10 +3,15 @@ package com.listentogether.ensemble.activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,16 +25,31 @@ public class ContactsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
 
+        Bundle bdl = getIntent().getExtras();
+        String s = bdl.getString("users");
+        Log.d("recieved",s);
+
+        JSONArray users = null;
+
+        try {
+            users = new JSONArray(s);
+            Log.d("JSON Conversion: " , users.getClass().getName());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
         final ListView listview = (ListView) findViewById(R.id.contacts_list);
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile" };
 
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
+        for (int i = 0; i < users.length(); ++i) {
+            try {
+                list.add(users.getJSONObject(i).getString("name"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         final ContactsArrayAdapter adapter = new ContactsArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);

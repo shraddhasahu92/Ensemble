@@ -146,9 +146,16 @@ public class LoginActivity extends Activity {
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
 
+
+
+                        Bundle bdl = new Bundle();
+                        bdl.putString("users",users.toString());
+
                         // Launch main com.ensemble.activity
                         Intent intent = new Intent(LoginActivity.this,
                                 ContactsActivity.class);
+
+                        intent.putExtras(bdl);
                         startActivity(intent);
                         finish();
                     } else {
