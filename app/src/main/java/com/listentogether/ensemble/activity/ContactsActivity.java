@@ -1,13 +1,19 @@
 package com.listentogether.ensemble.activity;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,13 +33,11 @@ public class ContactsActivity extends AppCompatActivity {
 
         Bundle bdl = getIntent().getExtras();
         String s = bdl.getString("users");
-        Log.d("recieved",s);
 
         JSONArray users = null;
 
         try {
             users = new JSONArray(s);
-            Log.d("JSON Conversion: " , users.getClass().getName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -43,16 +47,17 @@ public class ContactsActivity extends AppCompatActivity {
 
         final ListView listview = (ListView) findViewById(R.id.contacts_list);
 
-        final ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> nameList = new ArrayList<String>();
+        final ArrayList<String> emailList = new ArrayList<String>();
         for (int i = 0; i < users.length(); ++i) {
             try {
-                list.add(users.getJSONObject(i).getString("name"));
+                nameList.add(users.getJSONObject(i).getString("name"));
+                emailList.add(users.getJSONObject(i).getString("email"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        final ContactsArrayAdapter adapter = new ContactsArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
+        final ContactsArrayAdapter adapter = new ContactsArrayAdapter(this.getBaseContext(),nameList,emailList);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,7 +70,8 @@ public class ContactsActivity extends AppCompatActivity {
                         .withEndAction(new Runnable() {
                             @Override
                             public void run() {
-                                list.remove(item);
+                                nameList.remove(item);
+                                emailList.remove(item);
                                 adapter.notifyDataSetChanged();
                                 view.setAlpha(1);
                             }
@@ -76,27 +82,37 @@ public class ContactsActivity extends AppCompatActivity {
 
     private class ContactsArrayAdapter extends ArrayAdapter<String> {
 
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+        private final ArrayList<String> names;
+        private final ArrayList<String> emails;
+        Context context;
 
-        public ContactsArrayAdapter(Context context, int textViewResourceId,
-                                  List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
+        public ContactsArrayAdapter(Context context, ArrayList<String> names,ArrayList<String> emails) {
+            super(context, -1, names);
+            this.context = context;
+            this.names = names;
+            this.emails = emails;
         }
 
+
+        @NonNull
         @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View rowView = inflater.inflate(R.layout.contacts_list_item, parent, false);
+            TextView textView1 = (TextView) rowView.findViewById(R.id.firstLine);
+            TextView textView2 = (TextView) rowView.findViewById(R.id.secondLine);
 
+            ImageView imageView = (ImageView) rowView.findViewById(R.id.dp);
+            textView1.setText(names.get(position));
+            textView2.setText(emails.get(position));
+            // change the icon for Windows and iPhone
+//            String s = values[position];
+            imageView.setImageResource(R.drawable.no_dp);
+
+            return rowView;
+        }
     }
 }
 
