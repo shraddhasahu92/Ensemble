@@ -18,6 +18,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.listentogether.ensemble.app.AppConfig;
 import com.listentogether.ensemble.app.AppController;
 import com.listentogether.ensemble.helper.SQLiteHandler;
@@ -50,6 +51,10 @@ public class LoginActivity extends Activity {
         inputPassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+
+
+        Log.d("FirebaseInstance id:",FirebaseInstanceId.getInstance().getToken());
+
 
         // Progress dialog
         pDialog = new ProgressDialog(this);

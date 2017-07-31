@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "562280764457",
+    "firebase_url": "https://ensemble-5f9ad.firebaseio.com",
+    "project_id": "ensemble-5f9ad",
+    "storage_bucket": "ensemble-5f9ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562280764457:android:b2c4f9a3abd82d77",
+        "android_client_info": {
+          "package_name": "com.listentogether.ensemble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562280764457-2vgaq42mot5t75dj808uk8d73on1ba0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.listentogether.ensemble",
+            "certificate_hash": "8a289578145a1b3d41bdfb776f70946f4638501f"
+          }
+        },
+        {
+          "client_id": "562280764457-97c5op7u506t97nlk2aeihjntkkbteug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClNhvDbiE-EQlWXj3zceQ4H3wPWlRU3hw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562280764457-97c5op7u506t97nlk2aeihjntkkbteug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
