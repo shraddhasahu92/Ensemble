@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.listentogether.ensemble"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -19,6 +19,17 @@ android {
     }
 }
 
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+}
+
+
 apply plugin: 'com.google.gms.google-services'
 
 dependencies {
@@ -31,13 +42,26 @@ dependencies {
     // https://mvnrepository.com/artifact/com.mcxiaoke.volley/library
     compile group: 'com.mcxiaoke.volley', name: 'library', version: '1.0.18'
 
+    compile "com.android.support:support-core-utils:25.4.0"
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
-    testCompile 'junit:junit:4.12'
 
 
     compile 'com.google.firebase:firebase-core:11.0.2'
     compile 'com.google.firebase:firebase-messaging:11.0.2'
+
+
+    compile 'com.google.firebase:firebase-database:11.0.2'
+    compile 'com.google.firebase:firebase-auth:11.0.2'
+
+    compile 'com.firebaseui:firebase-ui-auth:2.1.1'
+
+
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.github.bumptech.glide:glide:3.6.1'
 }
+
 

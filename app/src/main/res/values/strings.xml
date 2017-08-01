@@ -11,4 +11,7 @@
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="send_button_label">Send</string>
+    <string name="sign_out">Sign out</string>
 </resources>
